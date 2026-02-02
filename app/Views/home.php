@@ -154,7 +154,7 @@
                                 <div class="ihjbopt">
                                     <label>❖</label>
                                     <body>
-                                        <input type="text" value="939393938" id="myInput">
+                                        <input type="text" value="939393938" id="myInput" readonly>
                                         <button onclick="copyId()" class="copy-button">Copy</button>
                                     </body>
                                 </div>
@@ -395,11 +395,16 @@
 
             // Notif di layar
             document.addEventListener('DOMContentLoaded', () => {
-                const notifications = [
-                    { title: 'Adi', message: 'Bongkar 2B | Rp. 1.260.000.' },
-                    { title: 'Ulil', message: 'Bongkar 500B | Rp. 315.000.' },
-                    { title: 'Fais', message: 'Bongkar 4B | Rp. 252.000.' },
-                ];
+                const rawNotifications = [
+                    { "name": "Adi", "qty": "2B", "amount": 1260000 },
+                    { "name": "Farix", "qty": "1B", "amount": 13000 },
+                    { "name": "Sony", "qty": "2B", "amount": 547000 },
+                    { "name": "Refvop", "qty": "12B", "amount": 7835700 },
+                ]
+                const notifications = rawNotifications.map(({ name, qty, amount }) => ({
+                    title: name,
+                    message: `Bongkar ${qty} | Rp. ${amount.toLocaleString('id-ID')}`
+                }))
             
                 const container = document.getElementById('notifications-container');
                 let currentIndex = 0;
@@ -440,7 +445,7 @@
                     setInterval(() => {
                         createNotification(notifications[currentIndex]);
                         currentIndex = (currentIndex + 1) % notifications.length;
-                    }, 6000); 
+                    }, 5000); 
                 }
             
                 showNotifications();
