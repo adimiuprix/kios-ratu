@@ -249,7 +249,8 @@
                                             role="tabpanel"
                                             aria-labelledby="notifikasi-tab">
                                             <div class="table-responsive">
-                                                <table class="table table-styling table-primary">
+                                                <table class="table table-styling table-dark mb-0">
+                                                    <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#tambahNotifikasiModal">Tambah data</button>
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
@@ -260,16 +261,17 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        <?php foreach ($notifications as $index => $notif): ?>
                                                         <tr>
-                                                            <td>1</td>
-                                                            <td>Mark</td>
-                                                            <td>Otto</td>
-                                                            <td>@mdo</td>
+                                                            <td><?= $index + 1 ?></td>
+                                                            <td><?= $notif['name'] ?></td>
+                                                            <td><?= $notif['qty'] ?></td>
+                                                            <td><?= $notif['amount'] ?></td>
                                                             <td>
-                                                                <a href="#"><i class="fas fa-adjust f-16 text-success"></i></a>
-                                                                <a href="#"><i class="feather icon-trash-2 ms-3 f-16 text-danger"></i></a>
+                                                                <a href="<?= base_url('/admin/hapus-notifikasi/' . $notif['id']) ?>"><b class="d-block text-danger">hapus</b></a>
                                                             </td>
                                                         </tr>
+                                                        <?php endforeach; ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -302,6 +304,40 @@
             </div>
         </div>
     </footer>
+
+    <div id="tambahNotifikasiModal" class="modal fade" tabindex="-1" aria-labelledby="tambahNotifikasiModal" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahNotifikasiModalTitle">Tambah Notifikasi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="<?= base_url('admin/notifikasi/tambah') ?>" method="post">
+                    <?= csrf_field() ?>
+                    <div class="modal-body">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input id="name" name="name" class="mb-3 form-control form-control-lg" type="text" placeholder="Nama">
+                                </div>
+                                <div class="col-md-12">
+                                    <input id="qty" name="qty" class="mb-3 form-control form-control-lg" type="text" placeholder="Quantitas">
+                                </div>
+                                <div class="col-md-12">
+                                    <input id="amount" name="amount" class="mb-3 form-control form-control-lg" type="text" placeholder="Harga">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Tentukan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Required Js -->
     <script src="<?= base_url('admin-assets/js/plugins/popper.min.js') ?>"></script>
     <script src="<?= base_url('admin-assets/js/plugins/simplebar.min.js') ?>"></script>

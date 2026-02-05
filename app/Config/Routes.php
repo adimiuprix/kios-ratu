@@ -17,5 +17,8 @@ $routes->group('admin', static function ($routes) {
 
     $routes->post('update-settings', 'Admin::updateSettings');
 
+    $routes->post('notifikasi/tambah', 'Admin::addNotification');
+    $routes->get('hapus-notifikasi/(:num)', 'Admin::deleteNotification/$1');
+
     $routes->get('logout', 'Admin::logout');
 });
