@@ -2,16 +2,16 @@
 
 namespace App\Controllers;
 
+use App\Models\Setting;
+
 class Home extends BaseController
 {
     public function index(): string
     {
-        $data = [
-            'title' => 'Bongkar Chip Higgs Domino 24 Jam - Proses Cepat dan Aman',
-            'description' => 'Bongkar Chip Higgs Domino Anda melalui layanan bongkaran 24 jam. Proses cepat, aman, dan terpercaya. Layanan bongkaran koin Higgs Domino siap membantu kapan saja.',
-            'keywords' => 'bongkaran koin Higgs Domino, layanan bongkaran koin domino, top up koin Higgs Domino 24 jam, beli koin Higgs Domino, jual koin Higgs Domino terpercaya',
-            'robots' => 'index, follow',
+        $setting = new Setting();
+        $setting = $setting->first();
 
+        $data = [
             'notifications' => [
                 ['name' => 'Andi Pratama', 'qty' => '2B', 'amount' => 126000],
                 ['name' => 'Siti Aminah', 'qty' => '500M', 'amount' => 31500],
@@ -30,14 +30,15 @@ class Home extends BaseController
                 ['name' => 'Fajar Sidik', 'qty' => '2.5B', 'amount' => 157500],
             ],
 
-            'background' => 'bg.jpg',
-            'banner' => 'banner.jpg',
-
-            'tutorial_bongkar' => 'https://www.youtube.com/@kiosratu_digital',
-            'tutorial_jual' => 'https://www.youtube.com/@kiosratu_digital',
-
-            'admin_img' => 'oke122.png',
-            'admin_id' => '939393938',
+            'title' => $setting['title'],
+            'description' => $setting['description'],
+            'keywords' => $setting['keywords'],
+            'background' => $setting['background'],
+            'banner' => $setting['banner'],
+            'tutorial_bongkar' => $setting['tutorial_bongkar'],
+            'tutorial_jual' => $setting['tutorial_jual'],
+            'admin_img' => $setting['admin_img'],
+            'admin_id' => $setting['admin_id'],
         ];
 
         return view('home', $data);

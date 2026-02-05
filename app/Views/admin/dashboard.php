@@ -204,8 +204,8 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
-                                                            <label class="col-sm-3 col-form-label">Tutorial Kirim Chip</label>
-                                                            <input type="text" name="tutorial_kirim" class="form-control" placeholder="Ketik Link" value="<?= $tutorial_kirim ?>" />
+                                                            <label class="col-sm-3 col-form-label">Tutorial Jual</label>
+                                                            <input type="text" name="tutorial_jual" class="form-control" placeholder="Ketik Link" value="<?= $tutorial_jual ?>" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
