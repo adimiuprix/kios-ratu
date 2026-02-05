@@ -407,79 +407,70 @@
 
         // Notif di layar
         document.addEventListener('DOMContentLoaded', () => {
-            const rawNotifications = [{
-                    "name": "Adi",
-                    "qty": "2B",
-                    "amount": 1260000
-                },
-                {
-                    "name": "Farix",
-                    "qty": "1B",
-                    "amount": 13000
-                },
-                {
-                    "name": "Sony",
-                    "qty": "2B",
-                    "amount": 547000
-                },
-                {
-                    "name": "Refvop",
-                    "qty": "12B",
-                    "amount": 7835700
-                },
-            ]
+            const rawNotifications = <?= json_encode($notifications) ?>;
+            if (!rawNotifications || rawNotifications.length === 0) return;
+
             const notifications = rawNotifications.map(({
                 name,
                 qty,
                 amount
             }) => ({
                 title: name,
-                message: `Bongkar ${qty} | Rp. ${amount.toLocaleString('id-ID')}`
-            }))
+                message: `Berhasil Bongkar ${qty}<br><span style="color: #FFD700; font-weight: bold;">Rp ${amount.toLocaleString('id-ID')}</span>`
+            }));
 
+            // Shuffle notifications to make them look random
+            const shuffled = [...notifications].sort(() => Math.random() - 0.5);
             const container = document.getElementById('notifications-container');
             let currentIndex = 0;
 
             function createNotification(notification) {
-                const notificationDiv = document.createElement('div')
-                notificationDiv.className = 'notification'
+                const notificationDiv = document.createElement('div');
+                notificationDiv.className = 'notification';
 
-                const icon = document.createElement('img')
-                icon.src = 'assets/images/reg_gold_.png'
-                icon.alt = 'Icon Pemberitahuan'
-                icon.className = 'notification-icon'
+                const icon = document.createElement('img');
+                icon.src = 'assets/images/reg_gold_.png'; // Ensure this exists or use a fallback
+                icon.alt = 'Icon';
+                icon.className = 'notification-icon';
 
-                const contentDiv = document.createElement('div')
-                contentDiv.className = 'notification-content'
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'notification-content';
 
-                const titleDiv = document.createElement('div')
-                titleDiv.className = 'notification-title'
-                titleDiv.textContent = notification.title
+                const titleDiv = document.createElement('div');
+                titleDiv.className = 'notification-title';
+                titleDiv.textContent = notification.title;
 
-                const messageDiv = document.createElement('div')
-                messageDiv.className = 'notification-message'
-                messageDiv.textContent = notification.message
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'notification-message';
+                messageDiv.innerHTML = notification.message;
 
-                contentDiv.appendChild(titleDiv)
-                contentDiv.appendChild(messageDiv)
-                notificationDiv.appendChild(icon)
-                notificationDiv.appendChild(contentDiv)
+                contentDiv.appendChild(titleDiv);
+                contentDiv.appendChild(messageDiv);
+                notificationDiv.appendChild(icon);
+                notificationDiv.appendChild(contentDiv);
 
-                container.appendChild(notificationDiv)
+                container.appendChild(notificationDiv);
 
+                // CSS handles the animation and removal via keyframes
+                // but we should still clean up the DOM
                 setTimeout(() => {
-                    container.removeChild(notificationDiv)
-                }, 4000);
+                    if (notificationDiv.parentNode === container) {
+                        container.removeChild(notificationDiv);
+                    }
+                }, 4500); // Slightly after the fadeOut animation finishes
             }
 
-            function showNotifications() {
-                setInterval(() => {
-                    createNotification(notifications[currentIndex]);
-                    currentIndex = (currentIndex + 1) % notifications.length;
-                }, 5000);
+            function showNext() {
+                createNotification(shuffled[currentIndex]);
+                currentIndex = (currentIndex + 1) % shuffled.length;
+
+                // Random time between 4 and 8 seconds
+                const nextTime = Math.floor(Math.random() * (8000 - 4000 + 1)) + 4000;
+                setTimeout(showNext, nextTime);
             }
 
-            showNotifications();
+            // Start first notification after 2 seconds
+            setTimeout(showNext, 2000);
         });
     </script>
 </body>

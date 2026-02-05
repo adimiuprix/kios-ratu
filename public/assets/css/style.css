@@ -1706,30 +1706,55 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
 #notifications-container {
     position: fixed;
-    color: #ffffff;
-    top  : 5px;
-    right : -10;
-    z-index:1000;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    pointer-events: none;
+    width: 280px;
 }
 
 .notification {
-    
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-    width: 100%;
-    padding: 10px;
-    background: linear-gradient(45deg, #118b8b, #FFD700);
-    border: 2px solid white;
-    border-radius: 18px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+    padding: 12px;
+    background: rgba(17, 139, 139, 0.95);
+    background: linear-gradient(135deg, #118b8b, #0d6d6d);
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    color: white;
+    backdrop-filter: blur(5px);
+    animation: slideInRight 0.5s ease forwards, fadeOut 0.5s ease forwards 3.5s;
+}
 
+@keyframes slideInRight {
+    from {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.9);
+    }
 }
 
 .notification-icon {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+    width: 45px;
+    height: 45px;
+    margin-right: 12px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .notification-content {
@@ -1737,11 +1762,16 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .notification-title {
-    font-weight: bold;
+    font-weight: 800;
+    font-size: 14px;
+    margin-bottom: 2px;
+    color: #FFD700;
 }
 
 .notification-message {
-    margin-top: 5px;
+    font-size: 13px;
+    opacity: 0.9;
+    line-height: 1.2;
 }
 /* Container untuk memastikan elemen berada di tengah */
 .container {
