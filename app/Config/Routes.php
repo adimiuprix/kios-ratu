@@ -14,5 +14,8 @@ $routes->group('admin', static function ($routes) {
     $routes->get('login', 'Admin::login');
     $routes->post('login', 'Admin::authenticate');
     $routes->get('dashboard', 'Admin::dashboard');
+
+    $routes->post('update-settings', 'Admin::updateSettings');
+
     $routes->get('logout', 'Admin::logout');
 });

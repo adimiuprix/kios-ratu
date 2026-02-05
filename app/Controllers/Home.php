@@ -11,7 +11,6 @@ class Home extends BaseController
             'description' => 'Bongkar Chip Higgs Domino Anda melalui layanan bongkaran 24 jam. Proses cepat, aman, dan terpercaya. Layanan bongkaran koin Higgs Domino siap membantu kapan saja.',
             'keywords' => 'bongkaran koin Higgs Domino, layanan bongkaran koin domino, top up koin Higgs Domino 24 jam, beli koin Higgs Domino, jual koin Higgs Domino terpercaya',
             'robots' => 'index, follow',
-            'site_name' => 'Higgs Games',
 
             'notifications' => [
                 ['name' => 'Andi Pratama', 'qty' => '2B', 'amount' => 126000],

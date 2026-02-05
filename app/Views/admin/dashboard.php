@@ -133,59 +133,148 @@
                     <div class="card-body">
                         <div class="form-wizard row justify-content-center">
                             <div class="card table-card border shadow-none">
+
                                 <div class="card-header pb-0 pt-2">
                                     <ul class="nav nav-tabs profile-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">School Pages</button>
+                                        <!-- Pengaturan Tab -->
+                                        <li class="nav-item" role="pengaturan">
+                                            <button
+                                                class="nav-link active"
+                                                id="pengaturan-tab"
+                                                data-bs-toggle="tab"
+                                                data-bs-target="#pengaturan-pane"
+                                                type="button"
+                                                role="tab"
+                                                aria-controls="pengaturan-pane"
+                                                aria-selected="true">
+                                                Pengaturan
+                                            </button>
                                         </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Product Pages</button>
+                                        <!-- Notifikasi Tab -->
+                                        <li class="nav-item" role="pengaturan">
+                                            <button
+                                                class="nav-link"
+                                                id="notifikasi-tab"
+                                                data-bs-toggle="tab"
+                                                data-bs-target="#notifikasi-pane"
+                                                type="button"
+                                                role="tab"
+                                                aria-controls="notifikasi-pane"
+                                                aria-selected="false">
+                                                Notifikasi
+                                            </button>
                                         </li>
                                     </ul>
                                 </div>
+
                                 <div class="card-body pb-0">
                                     <div class="tab-content" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                                            <form action="<?= base_url('admin/save-school') ?>" method="post">
+
+                                        <div
+                                            class="tab-pane fade show active"
+                                            id="pengaturan-pane"
+                                            role="tabpanel"
+                                            aria-labelledby="pengaturan-tab">
+                                            <form action="<?= base_url('admin/update-settings') ?>" method="post">
                                                 <?= csrf_field() ?>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
-                                                            <label class="form-label d-flex align-items-center"><i class="ph ph-buildings me-2"></i> School Name</label>
-                                                            <input type="text" name="school_name" class="form-control" placeholder="e.g. SMA Negeri 1 Tosun">
+                                                            <label class="col-sm-3 col-form-label">Judul</label>
+                                                            <input type="text" name="title" class="form-control" placeholder="Ketik Judul" value="<?= $title ?>" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
-                                                            <label class="form-label d-flex align-items-center"><i class="ph ph-link me-2"></i> School URL</label>
-                                                            <input type="url" name="school_url" class="form-control" placeholder="https://sman1tosun.sch.id">
+                                                            <label class="col-sm-3 col-form-label">Deskripsi</label>
+                                                            <input type="text" name="description" class="form-control" placeholder="Ketik Deskripsi" value="<?= $description ?>" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6">
                                                         <div class="mb-3">
-                                                            <label class="form-label d-flex align-items-center"><i class="ph ph-article me-2"></i> Description</label>
-                                                            <textarea name="description" class="form-control" rows="3" placeholder="Describe the school..."></textarea>
+                                                            <label class="col-sm-3 col-form-label">keywords</label>
+                                                            <input type="text" name="keywords" class="form-control" placeholder="Ketik Keywords" value="<?= $keywords ?>" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12">
-                                                        <div class="form-check form-switch mb-3">
-                                                            <input class="form-check-input" type="checkbox" name="is_active" id="isActiveSwitch" checked>
-                                                            <label class="form-check-label d-flex align-items-center" for="isActiveSwitch">
-                                                                Active Status <span class="badge bg-light-success border border-success text-success ms-2">Enabled</span>
-                                                            </label>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-3 col-form-label">Tutorial Bongkar</label>
+                                                            <input type="text" name="tutorial_bongkar" class="form-control" placeholder="Ketik Link" value="<?= $tutorial_bongkar ?>" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12 mt-4 pt-2 border-top">
-                                                        <button type="submit" class="btn btn-primary d-flex align-items-center">
-                                                            <i class="ph ph-floppy-disk me-2"></i> Save Changes
-                                                        </button>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-3 col-form-label">Tutorial Kirim Chip</label>
+                                                            <input type="text" name="tutorial_kirim" class="form-control" placeholder="Ketik Link" value="<?= $tutorial_kirim ?>" />
+                                                        </div>
                                                     </div>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-3 col-form-label">Admin Id</label>
+                                                            <input name="admin_id" id="admin_id" type="text" class="form-control" placeholder="Ketik Admin Id" value="<?= $admin_id ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-3 col-form-label">Background</label>
+                                                            <input name="background" id="background" type="file" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-3 col-form-label">Banner</label>
+                                                            <input name="banner" id="banner" type="file" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-3 col-form-label">Admin Img</label>
+                                                            <input name="admin_img" id="admin_img" type="file" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-center mt-4 pt-2 pb-2">
+                                                    <button type="submit" class="btn btn-primary d-flex align-items-center">
+                                                        <i class="ph ph-floppy-disk me-2"></i> Tentukan
+                                                    </button>
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 
+                                        <div
+                                            class="tab-pane fade"
+                                            id="notifikasi-pane"
+                                            role="tabpanel"
+                                            aria-labelledby="notifikasi-tab">
+                                            <div class="table-responsive">
+                                                <table class="table table-styling table-primary">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Nama</th>
+                                                            <th>Quantitas</th>
+                                                            <th>Harga</th>
+                                                            <th>Aksi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>Mark</td>
+                                                            <td>Otto</td>
+                                                            <td>@mdo</td>
+                                                            <td>
+                                                                <a href="#"><i class="fas fa-adjust f-16 text-success"></i></a>
+                                                                <a href="#"><i class="feather icon-trash-2 ms-3 f-16 text-danger"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
