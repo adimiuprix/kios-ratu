@@ -53,6 +53,27 @@ class Admin extends BaseController
         return view('admin/dashboard', $data);
     }
 
+    public function updateSettings()
+    {
+        $settingModel = new Setting();
+
+        $data = [
+            'title' => $this->request->getPost('title'),
+            'description' => $this->request->getPost('description'),
+            'keywords' => $this->request->getPost('keywords'),
+            'background' => $this->request->getPost('background'),
+            'banner' => $this->request->getPost('banner'),
+            'tutorial_bongkar' => $this->request->getPost('tutorial_bongkar'),
+            'tutorial_jual' => $this->request->getPost('tutorial_jual'),
+            'admin_img' => $this->request->getPost('admin_img'),
+            'admin_id' => $this->request->getPost('admin_id'),
+        ];
+
+        $settingModel->update(1, $data);
+
+        return redirect()->to(base_url('/admin/dashboard'));
+    }
+
     public function addNotification()
     {
         $notificationModel = new Notification();
