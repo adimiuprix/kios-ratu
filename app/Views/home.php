@@ -17,7 +17,6 @@
     <meta name="description" content="<?= $description ?>">
     <meta name="keywords" content="<?= $keywords ?>">
     <meta name="robots" content="index, follow">
-    <meta property="og:site_name" content="<?= $site_name ?>">
     <meta property="og:type" content="website">
     <meta name="copyright" content="Adimiuprix">
     <link rel="stylesheet" href="assets/css/style.css" />
