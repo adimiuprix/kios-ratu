@@ -175,7 +175,7 @@
                                             id="pengaturan-pane"
                                             role="tabpanel"
                                             aria-labelledby="pengaturan-tab">
-                                            <form action="<?= base_url('admin/update-settings') ?>" method="post">
+                                            <form action="<?= base_url('admin/update-settings') ?>" method="post" enctype="multipart/form-data">
                                                 <?= csrf_field() ?>
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -220,18 +220,27 @@
                                                         <div class="mb-3">
                                                             <label class="col-sm-3 col-form-label">Background</label>
                                                             <input name="background" id="background" type="file" class="form-control" />
+                                                            <?php if ($background): ?>
+                                                                <small class="text-muted">Current: <a href="<?= base_url('assets/images/' . $background) ?>" target="_blank"><?= $background ?></a></small>
+                                                            <?php endif; ?>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <label class="col-sm-3 col-form-label">Banner</label>
                                                             <input name="banner" id="banner" type="file" class="form-control" />
+                                                            <?php if ($banner): ?>
+                                                                <small class="text-muted">Current: <a href="<?= base_url('assets/images/' . $banner) ?>" target="_blank"><?= $banner ?></a></small>
+                                                            <?php endif; ?>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <label class="col-sm-3 col-form-label">Admin Img</label>
                                                             <input name="admin_img" id="admin_img" type="file" class="form-control" />
+                                                            <?php if ($admin_img): ?>
+                                                                <small class="text-muted">Current: <a href="<?= base_url('assets/images/' . $admin_img) ?>" target="_blank"><?= $admin_img ?></a></small>
+                                                            <?php endif; ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -262,15 +271,15 @@
                                                     </thead>
                                                     <tbody>
                                                         <?php foreach ($notifications as $index => $notif): ?>
-                                                        <tr>
-                                                            <td><?= $index + 1 ?></td>
-                                                            <td><?= $notif['name'] ?></td>
-                                                            <td><?= $notif['qty'] ?></td>
-                                                            <td><?= $notif['amount'] ?></td>
-                                                            <td>
-                                                                <a href="<?= base_url('/admin/hapus-notifikasi/' . $notif['id']) ?>"><b class="d-block text-danger">hapus</b></a>
-                                                            </td>
-                                                        </tr>
+                                                            <tr>
+                                                                <td><?= $index + 1 ?></td>
+                                                                <td><?= $notif['name'] ?></td>
+                                                                <td><?= $notif['qty'] ?></td>
+                                                                <td><?= $notif['amount'] ?></td>
+                                                                <td>
+                                                                    <a href="<?= base_url('/admin/hapus-notifikasi/' . $notif['id']) ?>"><b class="d-block text-danger">hapus</b></a>
+                                                                </td>
+                                                            </tr>
                                                         <?php endforeach; ?>
                                                     </tbody>
                                                 </table>

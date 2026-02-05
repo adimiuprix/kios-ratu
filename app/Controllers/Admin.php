@@ -36,18 +36,18 @@ class Admin extends BaseController
 
         $notification = new Notification();
         $notifications = $notification->findAll();
-    
+
         $data = [
-            'notifications' => $notifications,
-            'title' => $setting['title'],
-            'description' => $setting['description'],
-            'keywords' => $setting['keywords'],
-            'background' => $setting['background'],
-            'banner' => $setting['banner'],
-            'tutorial_bongkar' => $setting['tutorial_bongkar'],
-            'tutorial_jual' => $setting['tutorial_jual'],
-            'admin_img' => $setting['admin_img'],
-            'admin_id' => $setting['admin_id'],
+            'notifications'    => $notifications,
+            'title'            => $setting['title'] ?? '',
+            'description'      => $setting['description'] ?? '',
+            'keywords'         => $setting['keywords'] ?? '',
+            'background'       => $setting['background'] ?? '',
+            'banner'           => $setting['banner'] ?? '',
+            'tutorial_bongkar' => $setting['tutorial_bongkar'] ?? '',
+            'tutorial_jual'    => $setting['tutorial_jual'] ?? '',
+            'admin_img'        => $setting['admin_img'] ?? '',
+            'admin_id'         => $setting['admin_id'] ?? '',
         ];
 
         return view('admin/dashboard', $data);
@@ -56,22 +56,36 @@ class Admin extends BaseController
     public function updateSettings()
     {
         $settingModel = new Setting();
+        $setting = $settingModel->first();
+        $id = $setting['id'] ?? 1;
 
         $data = [
-            'title' => $this->request->getPost('title'),
-            'description' => $this->request->getPost('description'),
-            'keywords' => $this->request->getPost('keywords'),
-            'background' => $this->request->getPost('background'),
-            'banner' => $this->request->getPost('banner'),
+            'title'            => $this->request->getPost('title'),
+            'description'      => $this->request->getPost('description'),
+            'keywords'         => $this->request->getPost('keywords'),
             'tutorial_bongkar' => $this->request->getPost('tutorial_bongkar'),
-            'tutorial_jual' => $this->request->getPost('tutorial_jual'),
-            'admin_img' => $this->request->getPost('admin_img'),
-            'admin_id' => $this->request->getPost('admin_id'),
+            'tutorial_jual'    => $this->request->getPost('tutorial_jual'),
+            'admin_id'         => $this->request->getPost('admin_id'),
         ];
 
-        $settingModel->update(1, $data);
+        $files = ['background', 'banner', 'admin_img'];
 
-        return redirect()->to(base_url('/admin/dashboard'));
+        foreach ($files as $fileName) {
+            $file = $this->request->getFile($fileName);
+            if ($file && $file->isValid() && !$file->hasMoved()) {
+                $newName = $file->getRandomName();
+                $file->move(FCPATH . 'assets/images', $newName);
+                $data[$fileName] = $newName;
+            }
+        }
+
+        if ($setting) {
+            $settingModel->update($id, $data);
+        } else {
+            $settingModel->insert($data);
+        }
+
+        return redirect()->to(base_url('/admin/dashboard'))->with('success', 'Pengaturan berhasil diperbarui');
     }
 
     public function addNotification()
