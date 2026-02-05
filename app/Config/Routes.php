@@ -10,4 +10,9 @@ $routes->get('/success', 'Home::success');
 $routes->post('/telegram/send-message', 'Telegram::sendMessage');
 $routes->post('/telegram/send-document', 'Telegram::sendDocument');
 
-$routes->get('/admin', 'Admin::index');
+$routes->group('admin', static function ($routes) {
+    $routes->get('login', 'Admin::login');
+    $routes->post('login', 'Admin::authenticate');
+    $routes->get('dashboard', 'Admin::dashboard');
+    $routes->get('logout', 'Admin::logout');
+});
